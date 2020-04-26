@@ -1,38 +1,38 @@
 <script>
-  import Spinner from '../Spinner/Spinner.svelte'
+  import Spinner from "../Spinner/Spinner.svelte";
 
-  export let src
-  export let fallback
-  export let alt
+  export let src;
+  export let fallback;
+  export let alt;
 
-  let loading
-  let path
+  let loading;
+  let path;
 
   function preloadImage(image, fallback) {
-    loading = true
-    path = image
+    loading = true;
+    path = image;
+    const img = new Image();
     const timeout = setTimeout(() => {
-      path = fallback
-      img.onerror = null
-      img.onload = null
-      loading = false
-    }, 1000)
-
-    const img = new Image()
+      path = fallback;
+      img.onerror = null;
+      img.onload = null;
+      loading = false;
+    }, 10000);
 
     img.onload = () => {
-      clearTimeout(timeout)
-      loading = false
-    }
+      clearTimeout(timeout);
+      loading = false;
+    };
     img.onerror = () => {
-      path = fallback
-      loading = false
-    }
+      clearTimeout(timeout);
+      path = fallback;
+      loading = false;
+    };
 
-    img.src = path
+    img.src = path;
   }
 
-  $: preloadImage(src, fallback)
+  $: preloadImage(src, fallback);
 </script>
 
 {#if loading}
