@@ -1,34 +1,34 @@
 <script>
-  import { onMount } from 'svelte'
-  import PokemonList from './PokemonList/PokemonList.svelte'
-  import Pagination from './Pagination/Pagination.svelte'
-  import Modal from './Modal/Modal.svelte'
-  import PokemonDetail from './PokemonDetail/PokemonDetail.svelte'
+  import { onMount } from "svelte";
+  import PokemonList from "./PokemonList/PokemonList.svelte";
+  import Pagination from "./Pagination/Pagination.svelte";
+  import Modal from "./Modal/Modal.svelte";
+  import PokemonDetail from "./PokemonDetail/PokemonDetail.svelte";
 
-  const PAGE_SIZE = 30
+  const PAGE_SIZE = 30;
 
-  let page
-  let item
-  let showModal
-  let pokemonId
+  let page;
+  let item;
+  let showModal;
+  let pokemonId;
 
   async function hashchange() {
-    const path = window.location.hash.slice(1)
-    console.log(path)
-    if (path.startsWith('/item')) {
-      showModal = true
-      pokemonId = path.substr(path.lastIndexOf('/') + 1)
-    } else if (path.startsWith('/top')) {
-      page = +path.slice(5)
-      showModal = false
-      item = null
+    const path = window.location.hash.slice(1);
+    console.log(path);
+    if (path.startsWith("/item")) {
+      showModal = true;
+      pokemonId = path.substr(path.lastIndexOf("/") + 1);
+    } else if (path.startsWith("/top")) {
+      page = +path.slice(5);
+      showModal = false;
+      item = null;
     } else {
-      showModal = false
-      window.location.hash = '/top/1'
+      showModal = false;
+      window.location.hash = "/top/1";
     }
   }
 
-  onMount(hashchange)
+  onMount(hashchange);
 </script>
 
 <style>
@@ -67,3 +67,14 @@
 
 </main>
 
+{#if showModal}
+  <Modal
+    on:close={() => {
+      showModal = false;
+      pokemonId = null;
+      window.location.hash = `/top/${page || 1}`;
+    }}
+    let:close>
+    <PokemonDetail {pokemonId} {close} />
+  </Modal>
+{/if}
