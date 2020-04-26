@@ -15,7 +15,7 @@
     color: #ffffff;
     font-size: 2rem;
     background-color: #e82323;
-    height: 3rem;
+    height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
