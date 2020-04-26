@@ -6,8 +6,8 @@ export const getPokemonDetail = (id) =>
   `${API_GATEWAY}${API_LIST_POKEMON + id}`;
 export const getEvolutionChain = (id) => `${API_GATEWAY}evolution-chain/${id}`;
 
-export const API_GET_SPRITE_FRONT = (id) => `/static/pokemon/${id}.png`;
-export const API_GET_SPRITE_BACK = (id) => `/static/pokemon/back/${id}.png`;
+export const API_GET_SPRITE_FRONT = (id) => `./static/pokemon/${id}.png`;
+export const API_GET_SPRITE_BACK = (id) => `./static/pokemon/back/${id}.png`;
 
 export const PAGINATION = (page = 1, limit = 20) => {
   let params = {
