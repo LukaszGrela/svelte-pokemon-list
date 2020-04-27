@@ -14,7 +14,7 @@
   .pokemon-item {
     position: relative;
     list-style: none;
-    width: 11.4rem;
+    width: 13.4rem;
     height: 13.9rem;
     background-color: #f7f7f7;
     margin: 1rem;
@@ -61,7 +61,7 @@
   :global([ref="Image"]) {
     width: 9.6rem;
     height: 9.6rem;
-    margin: 1.75rem 0.9rem 0.4rem 0.9rem;
+    margin: 1.75rem auto 0.4rem auto;
     display: block;
   }
 </style>
