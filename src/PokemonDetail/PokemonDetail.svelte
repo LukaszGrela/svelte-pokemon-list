@@ -64,8 +64,9 @@
   .column-left {
     display: flex;
     flex-direction: column;
-    width: 9.6rem;
+    width: 12.8rem;
     flex-shrink: 0;
+    margin-right: 0.5rem
   }
 
   .column-right {
