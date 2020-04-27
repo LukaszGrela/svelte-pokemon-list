@@ -37,6 +37,14 @@
   $: preloadImage(src, fallback);
 </script>
 
+<style>
+  .Image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
 <div class="Image" {ref}>
   {#if loading}
     <Spinner />
