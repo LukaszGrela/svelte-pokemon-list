@@ -4,6 +4,7 @@
   export let src;
   export let fallback;
   export let alt;
+  export let ref;
 
   let loading;
   let path;
@@ -12,19 +13,20 @@
     loading = true;
     path = image;
     const img = new Image();
-    const timeout = setTimeout(() => {
-      path = fallback;
-      img.onerror = null;
-      img.onload = null;
-      loading = false;
-    }, 10000);
+    // const timeout = setTimeout(() => {
+    //   path = fallback;
+    //   img.onerror = null;
+    //   img.onload = null;
+    //   loading = false;
+    // }, 10000);
 
     img.onload = () => {
-      clearTimeout(timeout);
+      // clearTimeout(timeout);
       loading = false;
     };
-    img.onerror = () => {
-      clearTimeout(timeout);
+    img.onerror = e => {
+      // clearTimeout(timeout);
+      console.error(e);
       path = fallback;
       loading = false;
     };
@@ -35,8 +37,10 @@
   $: preloadImage(src, fallback);
 </script>
 
-{#if loading}
-  <Spinner />
-{:else}
-  <img src={path} {alt} />
-{/if}
+<div class="Image" {ref}>
+  {#if loading}
+    <Spinner />
+  {:else}
+    <img src={path} {alt} />
+  {/if}
+</div>
