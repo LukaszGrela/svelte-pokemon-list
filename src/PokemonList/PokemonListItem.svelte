@@ -1,40 +1,13 @@
 <script>
-  import { onMount, beforeUpdate, afterUpdate } from 'svelte'
-  import { API_GET_SPRITE_FRONT } from '../api'
-  import { parseIdFromUrl } from '../utils'
+  import { onMount, beforeUpdate, afterUpdate } from "svelte";
+  import { API_GET_SPRITE_FRONT } from "../api";
+  import { parseIdFromUrl } from "../utils";
+  import Image from "../Image/Image.svelte";
 
-  export let i
-  export let item
+  export let i;
+  export let item;
 
-  let id
-  let image
-  let loading
-
-  function preloadImage() {
-    id = parseIdFromUrl(item.url)
-    image = API_GET_SPRITE_FRONT(id)
-    const timeout = setTimeout(() => {
-      image = API_GET_SPRITE_FRONT('default/0')
-      img.onerror = null
-      img.onload = null
-      loading = false
-    }, 1000)
-
-    const img = new Image()
-
-    img.onload = () => {
-      clearTimeout(timeout)
-      loading = false
-    }
-    img.onerror = () => {
-      image = API_GET_SPRITE_FRONT('default/0')
-      loading = false
-    }
-
-    img.src = image
-  }
-
-  $: preloadImage(item)
+  $: id = parseIdFromUrl(item.url);
 </script>
 
 <style>
@@ -59,7 +32,7 @@
   .pokemon-item:hover {
     position: relative;
   }
-  .pokemon-item:hover img {
+  .pokemon-item:hover :global([ref="Image"]) {
     position: relative;
     top: -2px;
     left: -2px;
@@ -85,7 +58,7 @@
     font-weight: 500;
   }
 
-  .pokemon-item img {
+  :global([ref="Image"]) {
     width: 9.6rem;
     height: 9.6rem;
     margin: 1.75rem 0.9rem 0.4rem 0.9rem;
@@ -96,17 +69,16 @@
 <li
   class="pokemon-item"
   on:click={() => {
-    window.location.hash = `/item/${id}`
-    console.log(window.location.hash)
+    window.location.hash = `/item/${id}`;
+    console.log(window.location.hash);
   }}>
   <span class="number">#{i}</span>
-  {#if loading}
-    <p class="pokemon-image">loading</p>
-  {:else}
-    <img
-      src={image}
-      class="pokemon-image"
-      alt={`Image of ${item.name} pokemon.`} />
-  {/if}
+
+  <Image
+    src={API_GET_SPRITE_FRONT(id)}
+    fallback={API_GET_SPRITE_FRONT('default/0')}
+    ref="Image"
+    alt={`Image of ${item.name} pokemon.`} />
+
   <div class="pokemon-name">{item.name}</div>
 </li>
