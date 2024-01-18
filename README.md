@@ -1,7 +1,7 @@
 # Pokemon list
 Sample [Svelte](https://svelte.dev) SPA to get the RESTful API like Pokemon API for a spin.
 
-[Live Preview](http://greladesign.co/svelte/pokemon-list)
+[Live Preview](https://greladesign.co/svelte/pokemon-list)
 
 
 ## Pokemon images
